@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Pricing() {
   const pricingPlans = [
     {
@@ -79,9 +81,9 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-              <button className={`pricing-btn ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}>
+              <Link href="/payment" className={`pricing-btn ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}>
                 {plan.buttonText}
-              </button>
+              </Link>
             </div>
           ))}
         </div>
