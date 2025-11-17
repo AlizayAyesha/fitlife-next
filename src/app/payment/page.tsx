@@ -20,7 +20,6 @@ export default function Payment() {
     country: 'United States'
   });
 
-  // In a real app, this would come from URL params or global state
   const plans: Record<string, { name: string; price: string; features: string[]; popular: boolean }> = {
     'basic': {
       name: 'Basic Plan',
@@ -47,331 +46,582 @@ export default function Payment() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const paymentFormStyle: React.CSSProperties = {
+    background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+    minHeight: '100vh',
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+  };
+
   return (
     <>
       <Navbar />
-      <main>
-        {/* Background Gradient */}
-        <div className="fixed inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 -z-10" />
+      <main style={paymentFormStyle}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '2rem 1rem'
+        }}>
 
-        <section className="min-h-screen py-8 px-4 flex items-center justify-center">
-          <div className="max-w-6xl w-full mx-auto">
-            {/* Header */}
-            <div className="text-center mb-8">
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Complete Your Purchase
-              </h1>
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                Start your fitness journey today with our premium subscription
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-
-              {/* Plan Selection - Left Column */}
-              <div className="xl:col-span-1 space-y-6">
-                <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 border border-white/20">
-                  <h2 className="text-2xl font-bold text-white mb-6">Choose Your Plan</h2>
-
-                  {!selectedPlan ? (
-                    <div className="space-y-4">
-                      {Object.entries(plans).map(([key, plan]) => (
-                        <div
-                          key={key}
-                          onClick={() => setSelectedPlan(key)}
-                          className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-                            plan.popular
-                              ? 'border-yellow-400 bg-gradient-to-r from-yellow-400/20 to-orange-500/20'
-                              : 'border-white/30 bg-white/5 hover:border-white/50 hover:bg-white/10'
-                          }`}
-                        >
-                          {plan.popular && (
-                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold">
-                              MOST POPULAR
-                            </div>
-                          )}
-                          <div className="flex justify-between items-center mb-2">
-                            <h3 className="font-bold text-white text-lg">{plan.name}</h3>
-                            <span className="text-yellow-400 font-bold text-lg">{plan.price}</span>
-                          </div>
-                          <ul className="text-sm text-gray-300 space-y-1">
-                            {plan.features.map((feature, idx) => (
-                              <li key={idx} className="flex items-center">
-                                <span className="text-green-400 mr-2">✓</span>
-                                {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      <div className="bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-2xl p-6 border border-blue-500/30">
-                        <div className="flex justify-between items-center mb-4">
-                          <h3 className="font-bold text-white text-xl">{plans[selectedPlan].name}</h3>
-                          <span className="text-yellow-400 font-bold text-2xl">{plans[selectedPlan].price}</span>
-                        </div>
-                        <ul className="text-sm text-gray-300 space-y-2 mb-4">
-                          {plans[selectedPlan].features.map((feature, idx) => (
-                            <li key={idx} className="flex items-center">
-                              <span className="text-green-400 mr-2 text-lg">✓</span>
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="space-y-2">
-                          <div className="flex items-center text-yellow-400">
-                            <span className="mr-2">🎁</span>
-                            <span className="text-sm">14-day free trial included</span>
-                          </div>
-                          <div className="flex items-center text-yellow-400">
-                            <span className="mr-2">🔒</span>
-                            <span className="text-sm">Secure payment guaranteed</span>
-                          </div>
-                        </div>
-                        <button
-                          onClick={() => setSelectedPlan('')}
-                          className="mt-4 text-sm text-yellow-400 hover:text-yellow-300 underline transition-colors"
-                        >
-                          Change Plan
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Payment Form - Right Columns */}
-              <div className="xl:col-span-2">
-                <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-
-                  {selectedPlan ? (
-                    <>
-                      <h2 className="text-2xl font-bold text-white mb-6">Payment Information</h2>
-
-                      {/* Payment Method Selection */}
-                      <div className="mb-8">
-                        <label className="block text-sm font-medium text-gray-200 mb-4">
-                          Payment Method
-                        </label>
-                        <div className="grid grid-cols-2 gap-4">
-                          {['card', 'paypal'].map((method) => (
-                            <button
-                              key={method}
-                              type="button"
-                              onClick={() => setPaymentMethod(method)}
-                              className={`p-4 rounded-xl border-2 transition-all duration-300 flex items-center justify-center space-x-3 ${
-                                paymentMethod === method
-                                  ? 'border-blue-400 bg-blue-500/20 text-blue-300'
-                                  : 'border-white/30 bg-white/5 text-gray-300 hover:border-white/50 hover:bg-white/10'
-                              }`}
-                            >
-                              <span className="text-3xl">{method === 'card' ? '💳' : '📱'}</span>
-                              <span className="font-medium capitalize">{method === 'card' ? 'Credit Card' : 'PayPal'}</span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <form className="space-y-6">
-                        {paymentMethod === 'card' ? (
-                          /* Card Information */
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="md:col-span-2">
-                              <label className="block text-sm font-medium text-gray-200 mb-2">
-                                Card Number
-                              </label>
-                              <input
-                                type="text"
-                                name="cardNumber"
-                                value={formData.cardNumber}
-                                onChange={handleInputChange}
-                                placeholder="1234 5678 9012 3456"
-                                className="w-full p-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                              />
-                            </div>
-
-                            <div>
-                              <label className="block text-sm font-medium text-gray-200 mb-2">
-                                Expiry Date
-                              </label>
-                              <input
-                                type="text"
-                                name="expiryDate"
-                                value={formData.expiryDate}
-                                onChange={handleInputChange}
-                                placeholder="MM/YY"
-                                className="w-full p-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                              />
-                            </div>
-
-                            <div>
-                              <label className="block text-sm font-medium text-gray-200 mb-2">
-                                CVV
-                              </label>
-                              <input
-                                type="text"
-                                name="cvv"
-                                value={formData.cvv}
-                                onChange={handleInputChange}
-                                placeholder="123"
-                                className="w-full p-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                              />
-                            </div>
-
-                            <div className="md:col-span-2">
-                              <label className="block text-sm font-medium text-gray-200 mb-2">
-                                Cardholder Name
-                              </label>
-                              <input
-                                type="text"
-                                name="cardholderName"
-                                value={formData.cardholderName}
-                                onChange={handleInputChange}
-                                placeholder="John Doe"
-                                className="w-full p-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                              />
-                            </div>
-                          </div>
-                        ) : (
-                          /* PayPal Info */
-                          <div className="text-center py-12">
-                            <div className="mb-6">
-                              <span className="text-6xl">📱</span>
-                            </div>
-                            <p className="text-gray-300 mb-6">
-                              You'll be redirected to PayPal to complete your payment securely.
-                            </p>
-                          </div>
-                        )}
-
-                        {/* Billing Information */}
-                        <div className="space-y-4 border-t border-white/20 pt-6">
-                          <h3 className="font-semibold text-white text-lg">Billing Information</h3>
-
-                          <div>
-                            <label className="block text-sm font-medium text-gray-200 mb-2">
-                              Email Address
-                            </label>
-                            <input
-                              type="email"
-                              name="email"
-                              value={formData.email}
-                              onChange={handleInputChange}
-                              placeholder="john@example.com"
-                              className="w-full p-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                            />
-                          </div>
-
-                          <div>
-                            <label className="block text-sm font-medium text-gray-200 mb-2">
-                              Billing Address
-                            </label>
-                            <input
-                              type="text"
-                              name="address"
-                              value={formData.address}
-                              onChange={handleInputChange}
-                              placeholder="123 Main Street"
-                              className="w-full p-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                            />
-                          </div>
-
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <div>
-                              <label className="block text-sm font-medium text-gray-200 mb-2">
-                                City
-                              </label>
-                              <input
-                                type="text"
-                                name="city"
-                                value={formData.city}
-                                onChange={handleInputChange}
-                                placeholder="New York"
-                                className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-200 mb-2">
-                                ZIP Code
-                              </label>
-                              <input
-                                type="text"
-                                name="zipCode"
-                                value={formData.zipCode}
-                                onChange={handleInputChange}
-                                placeholder="10001"
-                                className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                              />
-                            </div>
-                            <div className="hidden md:block">
-                              <label className="block text-sm font-medium text-gray-200 mb-2">
-                                Country
-                              </label>
-                              <input
-                                type="text"
-                                name="country"
-                                value={formData.country}
-                                onChange={handleInputChange}
-                                className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Complete Payment Button */}
-                        <button
-                          type="submit"
-                          className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-4 px-6 rounded-xl hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-xl"
-                        >
-                          <span className="flex items-center justify-center space-x-2">
-                            <span>🚀</span>
-                            <span>Complete Your Purchase - {plans[selectedPlan]?.price}</span>
-                          </span>
-                        </button>
-
-                        {/* Trust indicators */}
-                        <div className="flex justify-center items-center space-x-6 text-sm text-gray-400">
-                          <div className="flex items-center space-x-2">
-                            <span className="text-green-400">🔒</span>
-                            <span>Secure SSL</span>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <span className="text-blue-400">💳</span>
-                            <span>PCI Compliant</span>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <span className="text-purple-400">💰</span>
-                            <span>30-Day Guarantee</span>
-                          </div>
-                        </div>
-                      </form>
-                    </>
-                  ) : (
-                    <div className="text-center py-20">
-                      <div className="text-6xl mb-6">🎯</div>
-                      <h3 className="text-2xl font-bold text-white mb-4">Choose Your Plan First</h3>
-                      <p className="text-gray-300">
-                        Select a fitness plan above to continue with your purchase
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                <div className="mt-6 text-center">
-                  <Link
-                    href="/#pricing"
-                    className="inline-flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
-                  >
-                    <span>←</span>
-                    <span>Back to Plans</span>
-                  </Link>
-                </div>
-              </div>
+          {/* Security Badge */}
+          <div style={{
+            textAlign: 'center',
+            marginBottom: '2rem'
+          }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              color: 'white',
+              padding: '0.5rem 1rem',
+              borderRadius: '2rem',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+            }}>
+              <span>🔒</span>
+              <span>256-bit SSL Encrypted</span>
             </div>
           </div>
-        </section>
+
+          {/* Header */}
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <h1 style={{
+              fontSize: '2.5rem',
+              fontWeight: '700',
+              color: '#1f2937',
+              marginBottom: '1rem'
+            }}>
+              Complete Your Payment
+            </h1>
+            <p style={{
+              fontSize: '1.125rem',
+              color: '#6b7280',
+              maxWidth: '600px',
+              margin: '0 auto'
+            }}>
+              Your payment information is fully secured and encrypted. Choose your plan below and proceed to checkout.
+            </p>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '2rem',
+            maxWidth: '1000px',
+            margin: '0 auto'
+          }}>
+
+            {/* Plan Selection */}
+            <div style={{
+              background: 'white',
+              borderRadius: '1rem',
+              padding: '1.5rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+              border: '1px solid #e5e7eb'
+            }}>
+              <h2 style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: '#374151',
+                marginBottom: '1.5rem'
+              }}>
+                Choose Your Plan
+              </h2>
+
+              {!selectedPlan ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {Object.entries(plans).map(([key, plan]) => (
+                    <div
+                      key={key}
+                      onClick={() => setSelectedPlan(key)}
+                      style={{
+                        padding: '1rem',
+                        border: `2px solid ${plan.popular ? '#fbbf24' : '#e5e7eb'}`,
+                        borderRadius: '0.75rem',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                        background: plan.popular ? '#fefce8' : 'white',
+                        position: 'relative'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = '0 10px 25px -3px rgba(0, 0, 0, 0.1)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }}
+                    >
+                      {plan.popular && (
+                        <div style={{
+                          position: 'absolute',
+                          top: '-10px',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          background: '#f59e0b',
+                          color: 'white',
+                          padding: '0.25rem 0.75rem',
+                          borderRadius: '9999px',
+                          fontSize: '0.75rem',
+                          fontWeight: '700',
+                          textTransform: 'uppercase'
+                        }}>
+                          Most Popular
+                        </div>
+                      )}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
+                        <div>
+                          <h3 style={{ fontWeight: '600', color: '#374151' }}>{plan.name}</h3>
+                          <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '0.25rem' }}>
+                            {plan.features.join(' • ')}
+                          </p>
+                        </div>
+                        <span style={{
+                          fontSize: '1.125rem',
+                          fontWeight: '700',
+                          color: plan.popular ? '#d97706' : '#059669'
+                        }}>
+                          {plan.price}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div>
+                  <div style={{
+                    padding: '1.5rem',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    borderRadius: '0.75rem',
+                    marginBottom: '1rem',
+                    color: 'white'
+                  }}>
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                      marginBottom: '1rem'
+                    }}>
+                      <h3 style={{ fontSize: '1.25rem', fontWeight: '600' }}>{plans[selectedPlan].name}</h3>
+                      <span style={{ fontSize: '1.5rem', fontWeight: '700' }}>{plans[selectedPlan].price}</span>
+                    </div>
+                    <ul style={{ listStyle: 'none', padding: 0 }}>
+                      {plans[selectedPlan].features.map((feature, idx) => (
+                        <li key={idx} style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontSize: '0.875rem',
+                          marginBottom: '0.5rem'
+                        }}>
+                          <span style={{ color: '#10b981', marginRight: '0.5rem' }}>✓</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <button
+                    onClick={() => setSelectedPlan('')}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      background: 'transparent',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '0.5rem',
+                      color: '#6b7280',
+                      fontSize: '0.875rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = '#9ca3af';
+                      e.currentTarget.style.color = '#374151';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = '#d1d5db';
+                      e.currentTarget.style.color = '#6b7280';
+                    }}
+                  >
+                    Change Plan
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Payment Form */}
+            {selectedPlan ? (
+              <div style={{
+                background: 'white',
+                borderRadius: '1rem',
+                padding: '1.5rem',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                border: '1px solid #e5e7eb'
+              }}>
+                <h2 style={{
+                  fontSize: '1.25rem',
+                  fontWeight: '600',
+                  color: '#374151',
+                  marginBottom: '1.5rem'
+                }}>
+                  Payment Information
+                </h2>
+
+                {/* Payment Method */}
+                <div style={{ marginBottom: '2rem' }}>
+                  <label style={{
+                    display: 'block',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    color: '#374151',
+                    marginBottom: '0.75rem'
+                  }}>
+                    Payment Method
+                  </label>
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                    gap: '1rem'
+                  }}>
+                    {[
+                      { id: 'card', name: 'Credit Card', icon: '💳' },
+                      { id: 'paypal', name: 'PayPal', icon: '🅿️' }
+                    ].map((method) => (
+                      <button
+                        key={method.id}
+                        type="button"
+                        onClick={() => setPaymentMethod(method.id)}
+                        style={{
+                          padding: '1rem',
+                          border: `2px solid ${paymentMethod === method.id ? '#3b82f6' : '#e5e7eb'}`,
+                          borderRadius: '0.5rem',
+                          background: paymentMethod === method.id ? '#eff6ff' : 'white',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          gap: '0.5rem'
+                        }}
+                      >
+                        <span style={{ fontSize: '1.5rem' }}>{method.icon}</span>
+                        <span style={{
+                          fontSize: '0.875rem',
+                          fontWeight: '600',
+                          color: paymentMethod === method.id ? '#1d4ed8' : '#374151'
+                        }}>
+                          {method.name}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <form>
+                  {paymentMethod === 'card' ? (
+                    <>
+                      {/* Card Information */}
+                      <div style={{ marginBottom: '2rem' }}>
+                        <h3 style={{
+                          fontSize: '1rem',
+                          fontWeight: '600',
+                          color: '#374151',
+                          marginBottom: '1rem'
+                        }}>
+                          Card Information
+                        </h3>
+
+                        <div style={{ marginBottom: '1rem' }}>
+                          <input
+                            type="text"
+                            name="cardNumber"
+                            placeholder="1234 5678 9012 3456"
+                            value={formData.cardNumber}
+                            onChange={handleInputChange}
+                            style={{
+                              width: '100%',
+                              padding: '0.75rem',
+                              border: '1px solid #d1d5db',
+                              borderRadius: '0.5rem',
+                              fontSize: '1rem',
+                              transition: 'border-color 0.2s ease'
+                            }}
+                            onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                            onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                          />
+                        </div>
+
+                        <div style={{
+                          display: 'grid',
+                          gridTemplateColumns: '1fr 1fr',
+                          gap: '1rem',
+                          marginBottom: '1rem'
+                        }}>
+                          <input
+                            type="text"
+                            name="expiryDate"
+                            placeholder="MM/YY"
+                            value={formData.expiryDate}
+                            onChange={handleInputChange}
+                            style={{
+                              padding: '0.75rem',
+                              border: '1px solid #d1d5db',
+                              borderRadius: '0.5rem',
+                              fontSize: '1rem',
+                              transition: 'border-color 0.2s ease'
+                            }}
+                            onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                            onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                          />
+                          <input
+                            type="text"
+                            name="cvv"
+                            placeholder="CVV"
+                            value={formData.cvv}
+                            onChange={handleInputChange}
+                            style={{
+                              padding: '0.75rem',
+                              border: '1px solid #d1d5db',
+                              borderRadius: '0.5rem',
+                              fontSize: '1rem',
+                              transition: 'border-color 0.2s ease'
+                            }}
+                            onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                            onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                          />
+                        </div>
+
+                        <div>
+                          <input
+                            type="text"
+                            name="cardholderName"
+                            placeholder="Cardholder Name"
+                            value={formData.cardholderName}
+                            onChange={handleInputChange}
+                            style={{
+                              width: '100%',
+                              padding: '0.75rem',
+                              border: '1px solid #d1d5db',
+                              borderRadius: '0.5rem',
+                              fontSize: '1rem',
+                              transition: 'border-color 0.2s ease'
+                            }}
+                            onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                            onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Billing Information */}
+                      <div>
+                        <h3 style={{
+                          fontSize: '1rem',
+                          fontWeight: '600',
+                          color: '#374151',
+                          marginBottom: '1rem'
+                        }}>
+                          Billing Information
+                        </h3>
+
+                        <div style={{ marginBottom: '1rem' }}>
+                          <input
+                            type="email"
+                            name="email"
+                            placeholder="Email Address"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            style={{
+                              width: '100%',
+                              padding: '0.75rem',
+                              border: '1px solid #d1d5db',
+                              borderRadius: '0.5rem',
+                              fontSize: '1rem',
+                              transition: 'border-color 0.2s ease'
+                            }}
+                            onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                            onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                          />
+                        </div>
+
+                        <div style={{ marginBottom: '1rem' }}>
+                          <input
+                            type="text"
+                            name="address"
+                            placeholder="Billing Address"
+                            value={formData.address}
+                            onChange={handleInputChange}
+                            style={{
+                              width: '100%',
+                              padding: '0.75rem',
+                              border: '1px solid #d1d5db',
+                              borderRadius: '0.5rem',
+                              fontSize: '1rem',
+                              transition: 'border-color 0.2s ease'
+                            }}
+                            onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                            onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                          />
+                        </div>
+
+                        <div style={{
+                          display: 'grid',
+                          gridTemplateColumns: '1fr 150px',
+                          gap: '1rem'
+                        }}>
+                          <input
+                            type="text"
+                            name="city"
+                            placeholder="City"
+                            value={formData.city}
+                            onChange={handleInputChange}
+                            style={{
+                              padding: '0.75rem',
+                              border: '1px solid #d1d5db',
+                              borderRadius: '0.5rem',
+                              fontSize: '1rem',
+                              transition: 'border-color 0.2s ease'
+                            }}
+                            onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                            onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                          />
+                          <input
+                            type="text"
+                            name="zipCode"
+                            placeholder="ZIP"
+                            value={formData.zipCode}
+                            onChange={handleInputChange}
+                            style={{
+                              padding: '0.75rem',
+                              border: '1px solid #d1d5db',
+                              borderRadius: '0.5rem',
+                              fontSize: '1rem',
+                              transition: 'border-color 0.2s ease'
+                            }}
+                            onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                            onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                          />
+                        </div>
+                      </div>
+
+                      <button
+                        type="submit"
+                        style={{
+                          width: '100%',
+                          marginTop: '2rem',
+                          padding: '1rem',
+                          background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '0.5rem',
+                          fontSize: '1.125rem',
+                          fontWeight: '600',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                          boxShadow: '0 4px 6px -1px rgba(59, 130, 246, 0.3)'
+                        }}
+                      >
+                        Complete Payment - {plans[selectedPlan]?.price}
+                      </button>
+                    </>
+                  ) : (
+                    <div style={{
+                      textAlign: 'center',
+                      padding: '3rem 1rem'
+                    }}>
+                      <div style={{
+                        fontSize: '3rem',
+                        marginBottom: '1rem'
+                      }}>
+                        🅿️
+                      </div>
+                      <h3 style={{
+                        fontSize: '1.25rem',
+                        fontWeight: '600',
+                        color: '#374151',
+                        marginBottom: '0.5rem'
+                      }}>
+                        PayPal Checkout
+                      </h3>
+                      <p style={{
+                        color: '#6b7280',
+                        marginBottom: '2rem'
+                      }}>
+                        You'll be redirected to PayPal to complete your secure payment.
+                      </p>
+                      <button
+                        type="submit"
+                        style={{
+                          padding: '1rem 2rem',
+                          background: '#0070ba',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '0.5rem',
+                          fontSize: '1rem',
+                          fontWeight: '600',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        Continue with PayPal
+                      </button>
+                    </div>
+                  )}
+                </form>
+              </div>
+            ) : (
+              <div style={{
+                background: 'white',
+                borderRadius: '1rem',
+                padding: '2rem',
+                textAlign: 'center',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                border: '1px solid #e5e7eb'
+              }}>
+                <div style={{
+                  fontSize: '3rem',
+                  marginBottom: '1rem'
+                }}>
+                  💳
+                </div>
+                <h3 style={{
+                  fontSize: '1.25rem',
+                  fontWeight: '600',
+                  color: '#374151',
+                  marginBottom: '0.5rem'
+                }}>
+                  Select a Plan First
+                </h3>
+                <p style={{
+                  color: '#6b7280'
+                }}>
+                  Choose your preferred subscription plan to continue with payment.
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Back Link */}
+          <div style={{
+            textAlign: 'center',
+            marginTop: '2rem'
+          }}>
+            <Link
+              href="/#pricing"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                color: '#6b7280',
+                textDecoration: 'none',
+                fontSize: '0.875rem',
+                transition: 'color 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#374151'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#6b7280'}
+            >
+              <span>←</span>
+              Back to Plans
+            </Link>
+          </div>
+        </div>
       </main>
       <Footer />
     </>
