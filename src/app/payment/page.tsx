@@ -14,10 +14,10 @@ export default function Payment() {
   };
 
   return (
-    <section className="section-padding bg-dark">
-      <div className="container">
+    <section className="py-20 px-4 bg-gray-900 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="h1 text-white mb-4">Complete Your Purchase</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Complete Your Purchase</h1>
           <p className="text-xl text-gray-300">Choose your payment method and get started with your fitness journey</p>
         </div>
 
@@ -32,7 +32,7 @@ export default function Payment() {
                 <h3 className="text-xl font-semibold text-gray-800">
                   {!selectedPlan ? 'Choose a Plan' : plans[selectedPlan].name}
                 </h3>
-                <span className="text-2xl font-bold text-coquelicot">
+                <span className="text-2xl font-bold text-red-500">
                   {!selectedPlan ? '$0.00' : plans[selectedPlan].price}
                 </span>
               </div>
@@ -78,7 +78,7 @@ export default function Payment() {
                   </p>
                   <button
                     onClick={() => setSelectedPlan('')}
-                    className="text-sm text-coquelicot hover:underline"
+                    className="text-sm text-red-500 hover:underline"
                   >
                     Change Plan
                   </button>
@@ -126,14 +126,14 @@ export default function Payment() {
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
-                    className="flex items-center justify-center p-3 border border-gray-200 rounded-lg hover:border-coquelicot transition-colors"
+                    className="flex items-center justify-center p-3 border border-gray-200 rounded-lg hover:border-red-500 transition-colors"
                   >
                     <span className="text-lg">💳</span>
                     <span className="ml-2 font-medium">Card</span>
                   </button>
                   <button
                     type="button"
-                    className="flex items-center justify-center p-3 border border-gray-200 rounded-lg hover:border-coquelicot transition-colors"
+                    className="flex items-center justify-center p-3 border border-gray-200 rounded-lg hover:border-red-500 transition-colors"
                   >
                     <span className="text-lg">📱</span>
                     <span className="ml-2 font-medium">PayPal</span>
@@ -147,10 +147,11 @@ export default function Payment() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Card Number
                   </label>
+
                   <input
                     type="text"
                     placeholder="1234 5678 9012 3456"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-coquelicot focus:border-transparent"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   />
                 </div>
 
@@ -162,7 +163,7 @@ export default function Payment() {
                     <input
                       type="text"
                       placeholder="MM/YY"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-coquelicot focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     />
                   </div>
                   <div>
@@ -172,7 +173,7 @@ export default function Payment() {
                     <input
                       type="text"
                       placeholder="123"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-coquelicot focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -184,7 +185,7 @@ export default function Payment() {
                   <input
                     type="text"
                     placeholder="John Doe"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-coquelicot focus:border-transparent"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -200,7 +201,7 @@ export default function Payment() {
                   <input
                     type="email"
                     placeholder="john@example.com"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-coquelicot focus:border-transparent"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   />
                 </div>
 
@@ -211,7 +212,7 @@ export default function Payment() {
                   <input
                     type="text"
                     placeholder="123 Main St"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-coquelicot focus:border-transparent"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   />
                 </div>
 
@@ -223,7 +224,7 @@ export default function Payment() {
                     <input
                       type="text"
                       placeholder="New York"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-coquelicot focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     />
                   </div>
                   <div>
@@ -233,7 +234,7 @@ export default function Payment() {
                     <input
                       type="text"
                       placeholder="10001"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-coquelicot focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -243,7 +244,7 @@ export default function Payment() {
               <button
                 type="submit"
                 disabled={!selectedPlan}
-                className="w-full bg-coquelicot text-white font-bold py-4 px-6 rounded-xl hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-red-500 text-white font-bold py-4 px-6 rounded-xl hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {selectedPlan ? `Complete Payment - ${plans[selectedPlan].price}` : 'Select a Plan to Continue'}
               </button>
@@ -254,7 +255,7 @@ export default function Payment() {
             </form>
 
             <div className="mt-6 text-center">
-              <Link href="/#pricing" className="text-coquelicot hover:underline text-sm">
+              <Link href="/#pricing" className="text-red-500 hover:underline text-sm">
                 ← Back to Plans
               </Link>
             </div>
