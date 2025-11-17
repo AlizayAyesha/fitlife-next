@@ -57,14 +57,14 @@ export default function Pricing() {
     >
       <div className="container">
         <p className="section-subtitle text-center">Choose Your Plan</p>
-        <h2 className="h2 section-title text-center">Membership Plans</h2>
+        <h2 className="h2 section-title text-center" style={{color: 'white'}}>Membership Plans</h2>
         <p className="section-text text-center">Transform your fitness journey with our flexible pricing options designed for every goal and budget.</p>
 
         <div className="pricing-grid">
           {pricingPlans.map((plan, index) => (
             <div className={`pricing-card ${plan.popular ? 'popular' : ''}`} key={index}>
               {plan.popular && (
-                <div className="popular-badge">Most Popular</div>
+                <div className="popular-badge" style={{top: '5px'}}>Most Popular</div>
               )}
               <div className="pricing-header">
                 <h3 className="pricing-name">{plan.name}</h3>
@@ -81,7 +81,23 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-              <Link href="/payment" className={`inline-block w-full py-3 px-6 rounded-lg font-bold text-lg transform transition duration-300 hover:scale-105 hover:shadow-lg ${plan.popular ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-blue-500/25' : 'bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white'}`}>
+              <Link href="/payment" style={{
+                display: 'inline-block',
+                width: '100%',
+                padding: '12px 24px',
+                borderRadius: '8px',
+                fontSize: '18px',
+                fontWeight: 'bold',
+                textAlign: 'center',
+                transition: 'all 300ms ease',
+                transform: 'scale(1)',
+                boxShadow: plan.popular ? '0 0 20px rgba(239, 68, 68, 0.4)' : 'none',
+                border: plan.popular ? 'none' : '2px solid #dc2626',
+                backgroundColor: plan.popular ? '#dc2626' : '#ffffff',
+                backgroundImage: plan.popular ? 'linear-gradient(90deg, #dc2626, #b91c1c)' : 'none',
+                color: plan.popular ? '#ffffff' : '#dc2626',
+                textDecoration: 'none'
+              }}>
                 {plan.buttonText}
               </Link>
             </div>
@@ -89,7 +105,7 @@ export default function Pricing() {
         </div>
 
         <div className="pricing-footer">
-          <p className="pricing-note text-white">All plans include a 14-day free trial. Cancel anytime.</p>
+          <p className="pricing-note" style={{color: 'white'}}>All plans include a 14-day free trial. Cancel anytime.</p>
         </div>
       </div>
     </section>
