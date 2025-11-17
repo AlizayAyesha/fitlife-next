@@ -53,7 +53,7 @@ export default function Blog() {
                     </a>
                   </h3>
                   <p className="card-text">{item.description}</p>
-                  <a href="#" className="btn-link has-before">
+                  <a href="#" className="btn-link has-before" style={{ color: 'red' }}>
                     Read More
                   </a>
                 </div>

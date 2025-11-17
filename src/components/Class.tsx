@@ -24,11 +24,25 @@ export default function Class() {
       icon: '/images/class-icon-3.png'
     },
     {
+      title: 'Pilates Workout',
+      description: 'Experience the mind-body connection with our comprehensive Pilates programs.',
+      progress: 75,
+      image: '/images/class-4.jpg',
+      icon: '/images/class-icon-4.png'
+    },
+    {
       title: 'The Fitness Pack',
       description: 'Suspendisse nisi libero, cursus ac magna sit amet, fermentum imperdiet nisi.',
       progress: 60,
       image: '/images/class-4.jpg',
       icon: '/images/class-icon-4.png'
+    },
+    {
+      title: 'New Male Beginner Tasks',
+      description: 'Start your fitness journey with targeted beginner routines designed specifically for men.',
+      progress: 45,
+      image: '/images/class-1.jpg',
+      icon: '/images/class-icon-1.png'
     }
   ]
 
@@ -40,8 +54,8 @@ export default function Class() {
       style={{ backgroundImage: "url('/images/classes-bg.png')" }}
     >
       <div className="container">
-        <p className="section-subtitle">Our Classes</p>
-        <h2 className="h2 section-title text-center">Fitness Classes For Every Goal</h2>
+        <p className="section-subtitle">Task Categories</p>
+        <h2 className="h2 section-title text-center">Fitness Programs For Every Goal</h2>
         <ul className="class-list has-scrollbar">
           {classes.map((item, index) => (
             <li className="scrollbar-item" key={index}>
@@ -66,7 +80,15 @@ export default function Class() {
                       className="title-icon"
                     />
                     <h3 className="h3">
-                      <a href="#" className="card-title">
+                      <a href={
+                        item.title === "Weight Lifting" ? "/weight-lifting" :
+                        item.title === "Cardio & Strenght" ? "/cardio-strength" :
+                        item.title === "Power Yoga" ? "/power-yoga" :
+                        item.title === "Pilates Workout" ? "/pilates-workout" :
+                        item.title === "The Fitness Pack" ? "/fitness-pack" :
+                        item.title === "New Male Beginner Tasks" ? "/male-beginner-tasks" :
+                        "#"
+                      } className="card-title">
                         {item.title}
                       </a>
                     </h3>

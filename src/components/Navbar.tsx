@@ -1,15 +1,15 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import Image from 'next/image'
+import Link from 'next/link'
 
-export default function Header() {
+export default function Navbar() {
   const [navbarActive, setNavbarActive] = useState(false)
   const [headerActive, setHeaderActive] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY >= 100) {
+      if (window.scrollY > 10) {
         setHeaderActive(true)
       } else {
         setHeaderActive(false)
@@ -32,10 +32,10 @@ export default function Header() {
   return (
     <header className={`header ${headerActive ? 'active' : ''}`} data-header>
       <div className="container">
-        <a href="#" className="logo">
+        <Link href="/" className="logo">
           {React.createElement('ion-icon', { name: 'barbell-sharp', 'aria-hidden': true })}
           <span className="span">Fitlife</span>
-        </a>
+        </Link>
 
         <nav className={`navbar ${navbarActive ? 'active' : ''}`} data-navbar>
           <button
@@ -49,36 +49,38 @@ export default function Header() {
 
           <ul className="navbar-list">
             <li>
-              <a href="#home" className="navbar-link active" data-nav-link onClick={closeNavbar}>
+              <Link href="/" className="navbar-link active" data-nav-link onClick={closeNavbar}>
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#about" className="navbar-link" data-nav-link onClick={closeNavbar}>
+              <Link href="/#about" className="navbar-link" data-nav-link onClick={closeNavbar}>
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#class" className="navbar-link" data-nav-link onClick={closeNavbar}>
+              <Link href="/#class" className="navbar-link" data-nav-link onClick={closeNavbar}>
                 Classes
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#blog" className="navbar-link" data-nav-link onClick={closeNavbar}>
+              <Link href="/#blog" className="navbar-link" data-nav-link onClick={closeNavbar}>
                 Blog
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="navbar-link" data-nav-link onClick={closeNavbar}>
+              <Link href="/#contact" className="navbar-link" data-nav-link onClick={closeNavbar}>
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
 
-        <a href="#" className="btn btn-secondary">
-          Join Now
-        </a>
+        <div className="navbar-actions flex gap-0.5">
+          <a href="/register" className="btn btn-secondary text-xs py-0.5 px-1">
+            Register Now
+          </a>
+        </div>
 
         <button
           className="nav-open-btn"

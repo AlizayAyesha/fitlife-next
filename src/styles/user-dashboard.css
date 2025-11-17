@@ -1,0 +1,618 @@
+.header .btn { display: none; }
+
+.header {
+  background-color: black;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-block: 10px;
+  box-shadow: none;
+  z-index: 4;
+}
+
+.header > .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: var(--white);
+  font-family: var(--ff-catamaran);
+  font-size: 3.5rem;
+  font-weight: var(--fw-900);
+  display: flex;
+  align-items: center;
+  margin-inline-start: -8px;
+}
+
+.logo ion-icon {
+  color: var(--coquelicot);
+  font-size: 40px;
+  transform: rotate(90deg) translate(-2px, -5px);
+}
+
+.nav-open-btn {
+  background-color: var(--coquelicot);
+  padding: 20px 15px;
+  border-radius: var(--radius-8);
+}
+
+.nav-open-btn .line {
+  background-color: var(--white);
+  width: 30px;
+  height: 3px;
+}
+
+.nav-open-btn .line:not(:last-child) { margin-block-end: 6px; }
+
+.nav-open-btn .line:nth-child(2) {
+  width: 25px;
+  margin-inline-start: auto;
+}
+
+.navbar {
+  background-color: var(--white);
+  color: var(--rich-black-fogra-29-1);
+  position: fixed;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  visibility: hidden;
+  transition: 0.25s var(--cubic-in);
+}
+
+.navbar.active {
+  visibility: visible;
+  transform: translateY(-100%);
+  transition: 0.5s var(--cubic-out);
+}
+
+.nav-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background-color: var(--rich-black-fogra-29-1);
+  color: var(--white);
+  font-size: 40px;
+  padding: 10px;
+  border-radius: var(--radius-8);
+}
+
+.navbar-link {
+  font-family: var(--ff-catamaran);
+  font-size: var(--fs-4);
+  text-align: center;
+  padding-block: 10px;
+  margin-block-end: 20px;
+  transition: var(--transition-1);
+}
+
+.navbar-link:is(:hover, :focus, .active) { color: var(--rich-black-fogra-29-1); }
+
+
+
+/*-----------------------------------*\
+  #HEADER ACTIVE STATE
+\*-----------------------------------*/
+
+.header.active {
+  background-color: var(--white);
+  box-shadow: var(--shadow-1);
+}
+
+.header.active .logo {
+  color: var(--rich-black-fogra-29-1);
+}
+
+.header.active .btn {
+  background-color: var(--coquelicot);
+  color: var(--white);
+}
+
+
+@media (min-width: 992px) {
+  .nav-open-btn,
+  .nav-close-btn { display: none; }
+
+  .header .btn { display: block; }
+
+  .navbar,
+  .navbar.active {
+    all: unset;
+    margin-inline-start: auto;
+  }
+
+
+  .navbar-list {
+    display: flex;
+    gap: 10px;
+  }
+
+  .navbar-link {
+    color: var(--white);
+    font-size: unset;
+    padding: 0 10px;
+    margin-block-end: 0;
+  }
+
+  .header.active .navbar-link { color: var(--rich-black-fogra-29-1); }
+
+  .header .navbar-link:is(:hover, :focus, .active) { color: var(--coquelicot); }
+}
+
+/*---------------------------
+   Dashboard Cards
+----------------------------*/
+
+/* Dashboard wrapper */
+.dashboard-main {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Modern Card Style with Better Visibility */
+.dashboard-section {
+  background: rgba(0, 0, 0, 0.9); /* darker background for charts visibility */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  padding: 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.dashboard-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+}
+
+/* Headings */
+.dashboard-section h2,
+.dashboard-section h3,
+.dashboard-section h4 {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* List items */
+.dashboard-section ul li {
+  color: #e5e7eb;
+  font-size: 0.95rem;
+  padding-left: 8px;
+}
+
+/* Better spacing */
+.dashboard-section ul {
+  margin-top: 0.7rem;
+}
+
+/* Chart colors */
+.recharts-responsive-container {
+  background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,0,0,0.1));
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/*-----------------------------------*\
+  #RESPONSIVE DAILY TRACKER
+\*-----------------------------------*/
+
+/* Daily Task Tracker Container */
+.daily-task-tracker {
+  background-color: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 16px;
+  margin: 32px 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive padding for desktop */
+@media (min-width: 640px) {
+  .daily-task-tracker {
+    padding: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .daily-task-tracker {
+    padding: 32px;
+  }
+}
+
+/* Tracker Header */
+.tracker-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.tracker-header .calendar-icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 640px) {
+  .tracker-header .calendar-icon {
+    font-size: 3.75rem;
+  }
+
+  .tracker-header {
+    margin-bottom: 24px;
+  }
+}
+
+.tracker-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 640px) {
+  .tracker-title {
+    font-size: 1.5rem;
+  }
+}
+
+.tracker-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #718096;
+  margin-bottom: 4px;
+}
+
+.tracker-level {
+  font-size: 0.875rem;
+  color: #a0aec0;
+}
+
+/* Task List */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .task-list {
+    gap: 16px;
+  }
+}
+
+/* Individual Task Item */
+.task-item {
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+  background-color: #fefefe;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 12px;
+}
+
+/* Responsive padding for task items */
+@media (min-width: 640px) {
+  .task-item {
+    padding: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .task-item {
+    padding: 20px;
+  }
+}
+
+.task-item.completed {
+  background-color: #f0fff4;
+  border-color: #68d391;
+  box-shadow: 0 4px 16px rgba(104, 211, 145, 0.1);
+}
+
+/* Task Item Content */
+.task-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin-bottom: 12px;
+}
+
+/* Desktop horizontal layout */
+@media (min-width: 640px) {
+  .task-content {
+    margin-bottom: 0;
+  }
+
+  .task-content.mobile {
+    flex-direction: column;
+    margin-bottom: 12px;
+  }
+
+  .task-content.desktop {
+    flex-direction: row;
+  }
+}
+
+.task-emoji {
+  font-size: 1.875rem;
+  margin-right: 12px;
+}
+
+@media (min-width: 640px) {
+  .task-emoji {
+    font-size: 2rem;
+  }
+}
+
+.task-details {
+  flex: 1;
+}
+
+.task-link {
+  display: block;
+  text-decoration: none;
+  color: #2d3748;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  margin: 0;
+  padding: 0;
+}
+
+.task-link:hover {
+  color: #4a5568;
+}
+
+@media (min-width: 640px) {
+  .task-link {
+    font-size: 1.125rem;
+  }
+}
+
+.task-description {
+  font-size: 0.875rem;
+  color: #718096;
+  margin-top: 4px;
+}
+
+.task-description.mobile {
+  display: block;
+}
+
+.task-description.desktop {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .task-description.mobile {
+    display: none;
+  }
+
+  .task-description.desktop {
+    display: block;
+  }
+}
+
+/* Task Actions */
+.task-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+}
+
+/* Desktop horizontal */
+@media (min-width: 640px) {
+  .task-actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+}
+
+.task-button {
+  padding: 8px 12px;
+  background-color: #68d391;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(104, 211, 145, 0.2);
+  text-align: center;
+}
+
+.task-button:hover {
+  background-color: #4ade80;
+  transform: translateY(-1px);
+}
+
+.task-button:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 640px) {
+  .task-button {
+    padding: 8px 16px;
+    font-size: 1rem;
+  }
+}
+
+.task-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #68d391;
+  margin: 12px 0;
+  padding-bottom: 8px;
+  width: 100%;
+  display: block;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 6px 8px 8px 8px;
+  transition: background-color 0.3s ease;
+}
+
+.task-status:hover {
+  background-color: rgba(104, 211, 145, 0.1);
+}
+
+.task-status.not-done {
+  color: #e53e3e;
+  margin-bottom: 0;
+}
+
+.task-status.not-done:hover {
+  background-color: rgba(229, 62, 62, 0.1);
+}
+
+@media (min-width: 640px) {
+  .task-status {
+    font-size: 1rem;
+    padding: 6px 12px 8px 12px;
+    width: auto;
+  }
+}
+
+/* Undo Button */
+.undo-button {
+  padding: 6px 12px;
+  background-color: #e53e3e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 4px;
+  align-self: center;
+}
+
+@media (min-width: 640px) {
+  .undo-button {
+    font-size: 0.875rem;
+    padding: 6px 12px;
+  }
+}
+
+/* Progress Summary */
+.progress-summary {
+  display: inline-block;
+  padding: 12px 16px;
+  background-color: #f7fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.progress-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.progress-text.mobile {
+  display: inline;
+}
+
+.progress-text.desktop {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .progress-summary {
+    padding: 12px 24px;
+  }
+
+  .progress-text {
+    font-size: 1rem;
+  }
+
+  .progress-text.mobile {
+    display: none;
+  }
+
+  .progress-text.desktop {
+    display: inline;
+  }
+}
+
+.progress-number {
+  color: #28a745;
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+@media (min-width: 640px) {
+  .progress-number {
+    font-size: 1.25rem;
+  }
+}
+
+/*-----------------------------------*\
+  #USER DASHBOARD NAVBAR
+\*-----------------------------------*/
+
+/* Navbar link styling for plain links */
+.navbar-link-plain {
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--ff-catamaran);
+  font-size: 2rem;  /* Increased size for better visibility */
+  font-weight: 600;
+  transition: color 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.navbar-link-plain:hover {
+  color: var(--coquelicot);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* User Profile Icon */
+.user-profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--coquelicot);
+  border: 2px solid var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 8px;
+}
+
+.user-profile-icon:hover {
+  background-color: var(--white);
+  border-color: var(--coquelicot);
+}
+
+.user-profile-icon ion-icon {
+  font-size: 20px;
+  color: var(--white);
+  transition: color 0.3s ease;
+}
+
+.user-profile-icon:hover ion-icon {
+  color: var(--coquelicot);
+}

@@ -18,13 +18,13 @@ export default function Hero() {
           <p className="section-text">
             Duis mollis felis quis libero dictum vehicula. Duis dictum lorem mi, a faucibus nisi eleifend eu.
           </p>
-          <a href="#" className="btn btn-primary">Get Started</a>
+          <a href="/register" className="btn btn-primary">Register Now</a>
         </div>
         <div className="hero-banner">
           <Image
             src="/images/hero-banner.png"
-            width={660}
-            height={753}
+            width={726}
+            height={828}
             alt="hero banner"
             className="w-100"
             priority

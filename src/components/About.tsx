@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function About() {
   return (
@@ -9,7 +10,7 @@ export default function About() {
             src="/images/about-banner.png"
             width={660}
             height={648}
-            alt="about banner"
+            alt=""
             className="w-100"
           />
           <Image
@@ -50,14 +51,14 @@ export default function About() {
           <div className="wrapper">
             <div className="about-coach">
               <figure className="coach-avatar">
-                <Image src="/images/about-coach.jpg" width={65} height={65} alt="Trainer" />
+                <Image src="https://img.freepik.com/free-photo/young-adult-doing-indoor-sport-gym_23-2149205542.jpg?semt=ais_hybrid&w=740&q=80" width={65} height={65} alt="Trainer" />
               </figure>
               <div>
-                <h3 className="h3 coach-name">Denis Robinson</h3>
+                <h3 className="h3 coach-name">Dr. Marco</h3>
                 <p className="coach-title">Our Coach</p>
               </div>
             </div>
-            <a href="#" className="btn btn-primary">Explore More</a>
+            <Link href="/coach" className="btn btn-primary">Explore More</Link>
           </div>
         </div>
       </div>
