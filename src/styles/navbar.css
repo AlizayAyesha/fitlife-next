@@ -48,6 +48,8 @@
   background-color: var(--white);
   width: 30px;
   height: 3px;
+  transition: 0.3s;
+  transform-origin: center;
 }
 
 .nav-open-btn .line:not(:last-child) { margin-block-end: 6px; }
@@ -55,6 +57,18 @@
 .nav-open-btn .line:nth-child(2) {
   width: 25px;
   margin-inline-start: auto;
+}
+
+.nav-open-btn.active .line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.nav-open-btn.active .line:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-open-btn.active .line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
 .navbar {
@@ -95,7 +109,7 @@
   padding-block: 10px;
   margin-block-end: 20px;
   transition: var(--transition-1);
-  color: var(--white);
+  color: var(--rich-black-fogra-29-1);
 }
 
 .navbar-link:is(:hover, :focus, .active) { color: var(--coquelicot); }
@@ -149,4 +163,45 @@
   .header.active .navbar-link { color: var(--rich-black-fogra-29-1); }
 
   .header .navbar-link:is(:hover, :focus, .active) { color: var(--coquelicot); }
+}
+
+/* Tablet responsiveness */
+@media (min-width: 768px) and (max-width: 991px) {
+  .nav-open-btn {
+    padding: 15px 12px;
+  }
+
+  .nav-open-btn .line {
+    width: 25px;
+    height: 2.5px;
+  }
+
+  .nav-open-btn .line:nth-child(2) {
+    width: 20px;
+  }
+
+  .navbar-link {
+    font-size: var(--fs-3);
+    padding-block: 12px;
+  }
+
+  .logo {
+    font-size: 3rem;
+  }
+
+  .logo ion-icon {
+    font-size: 35px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+  .navbar-link {
+    padding: 0 15px;
+    font-size: 1rem;
+  }
+
+  .navbar-list {
+    gap: 15px;
+  }
 }

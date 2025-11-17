@@ -1,0 +1,259 @@
+/*-----------------------------------*\
+  #ADMIN NAV RESPONSIVE - FIXED & OPTIMIZED
+\*-----------------------------------*/
+
+.admin-navbar {
+  background-color: var(--rich-black-fogra-29-1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.admin-navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.admin-navbar-logo {
+  display: flex;
+  align-items: center;
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  z-index: 1100;
+}
+
+.admin-navbar-logo span {
+  margin-left: 0.5rem;
+}
+
+/* HAMBURGER BUTTON */
+.admin-nav-open-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1200;
+  transition: transform 0.3s ease;
+  position: relative;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.admin-nav-open-btn:hover {
+  transform: scale(1.1);
+}
+
+.admin-line {
+  width: 25px;
+  height: 3px;
+  background-color: #ffeb3b;
+  margin: 3px 0;
+  transition: 0.3s ease;
+}
+
+.admin-nav-open-btn.active .admin-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.admin-nav-open-btn.active .admin-line:nth-child(2) {
+  opacity: 0;
+}
+
+.admin-nav-open-btn.active .admin-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* MOBILE MENU */
+.admin-navbar-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--rich-black-fogra-29-1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(-100%);
+  transition: 0.3s ease-in-out;
+  z-index: 1050;
+  overflow: hidden;
+}
+
+.admin-navbar-menu.active {
+  transform: translateX(0);
+  background-color: var(--rich-black-fogra-29-1);
+}
+
+.admin-menu-header {
+  padding: 10px;
+  color: var(--white);
+  font-size: 12px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.admin-navbar-link {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  margin: 0.5rem 0;
+  border-radius: 0.5rem;
+  transition: 0.3s ease;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-navbar-link:hover,
+.admin-navbar-link.active {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: var(--coquelicot);
+  transform: translateX(10px);
+}
+
+/* CLOSE BUTTON */
+.admin-nav-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: 2px solid var(--white);
+  color: var(--white);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  transition: 0.3s ease;
+  z-index: 1100;
+}
+
+.admin-nav-close-btn:hover {
+  background-color: var(--white);
+  color: var(--rich-black-fogra-29-1);
+  transform: rotate(90deg);
+}
+
+/* ------------------------------------------
+   MEDIA QUERIES (fixed, no nesting)
+-------------------------------------------*/
+
+/* <= 699px */
+@media (max-width: 699px) {
+  .admin-nav-open-btn {
+    display: flex;
+  }
+}
+
+/* <= 400px */
+@media (max-width: 400px) {
+  .admin-navbar-container {
+    padding: 0.75rem;
+  }
+
+  .admin-navbar-logo {
+    font-size: 1.25rem;
+  }
+
+  .admin-navbar-link {
+    font-size: 1.1rem;
+    width: 180px;
+  }
+
+  .admin-line {
+    width: 22px;
+    height: 2.5px;
+  }
+}
+
+/* <= 300px */
+@media (max-width: 300px) {
+  .admin-navbar-container {
+    padding: 0.5rem;
+    min-height: 60px;
+  }
+
+  .admin-navbar-logo {
+    font-size: 1.1rem;
+  }
+
+  .admin-navbar-link {
+    font-size: 1rem;
+    width: 160px;
+  }
+
+  .admin-nav-open-btn {
+    border: 2px solid #ffeb3b;
+    border-radius: 4px;
+  }
+
+  .admin-line {
+    width: 20px;
+    height: 2px;
+  }
+
+  .admin-navbar-menu {
+    padding-top: 5rem;
+  }
+}
+
+/* MOBILE LANDSCAPE */
+@media (max-height: 740px) and (max-width: 360px) {
+  .admin-navbar-menu {
+    justify-content: flex-start;
+    padding-top: 4rem;
+  }
+}
+
+/* DESKTOP (>= 700px) */
+@media (min-width: 700px) {
+  .admin-nav-open-btn,
+  .admin-nav-close-btn {
+    display: none;
+  }
+
+  .admin-navbar-menu {
+    position: static;
+    height: auto;
+    width: auto;
+    background: none;
+    flex-direction: row;
+    gap: 0.5rem;
+    transform: none !important;
+  }
+
+  .admin-navbar-link {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    width: auto;
+  }
+
+  .admin-navbar-link:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+  overflow: hidden;
+}

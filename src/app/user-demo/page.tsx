@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -70,6 +70,7 @@ export default function UserDemo() {
   const [gender, setGender] = useState('male');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [completedTasks, setCompletedTasks] = useState<string[]>([]);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleSettingsChange = (field: string, value: any) => {
     setProfileSettings(prev => ({ ...prev, [field]: value }));
@@ -174,18 +175,42 @@ export default function UserDemo() {
 
   return (
     <>
-      {/* Separate Navbar for User Dashboard with Specified Theme */}
-      <header className="header">
-        <div className="container">
-          <a href="/" className="logo">
+      {/* Responsive User Dashboard Navbar */}
+      <header className="user-dashboard-navbar">
+        <div className="user-navbar-container">
+          <a href="/" className="user-logo">
             {React.createElement('ion-icon', { name: 'barbell-sharp', 'aria-hidden': true })}
             <span>UserDashboard</span>
           </a>
-          <div className="flex gap-2 items-center">
-            <a href="/leader-dashboard" className="navbar-link-plain">Leader Dashboard</a>
-            <a href="/admin-demo" className="btn btn-secondary">Admin Demo</a>
-            <a href="/account" className="user-profile-icon">
-              {React.createElement('ion-icon', { name: 'person', 'aria-hidden': true })}
+
+          <button
+            className={`user-nav-open-btn ${menuOpen ? 'active' : ''}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+          >
+            <div className="user-line"></div>
+            <div className="user-line"></div>
+            <div className="user-line"></div>
+          </button>
+
+          <div className={`user-navbar-menu ${menuOpen ? 'active' : ''}`}>
+            <button
+              className="user-nav-close-btn"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close navigation menu"
+            >
+              {React.createElement('ion-icon', { name: 'close-sharp' })}
+            </button>
+
+            <a href="/leader-dashboard" className="user-navbar-link" onClick={() => setMenuOpen(false)}>
+              🏆 Leader Dashboard
+            </a>
+            <a href="/admin-demo" className="user-navbar-link" onClick={() => setMenuOpen(false)}>
+              ⚙️ Admin Demo
+            </a>
+            <a href="/account" className="user-navbar-link" onClick={() => setMenuOpen(false)}>
+              👤 Profile
             </a>
           </div>
         </div>

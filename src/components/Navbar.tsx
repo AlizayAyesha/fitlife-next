@@ -83,14 +83,14 @@ export default function Navbar() {
         </div>
 
         <button
-          className="nav-open-btn"
+          className={`nav-open-btn ${navbarActive ? 'active' : ''}`}
           aria-label="open menu"
           data-nav-toggler
           onClick={toggleNavbar}
         >
-          <span className="line"></span>
-          <span className="line"></span>
-          <span className="line"></span>
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
         </button>
       </div>
     </header>

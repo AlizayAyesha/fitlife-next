@@ -616,3 +616,187 @@
 .user-profile-icon:hover ion-icon {
   color: var(--coquelicot);
 }
+
+/*-----------------------------------*\
+  #USER DASHBOARD RESPONSIVE NAVBAR
+\*-----------------------------------*/
+
+/* User Dashboard Navbar */
+.user-dashboard-navbar {
+  background-color: #000000; /* Black background for dashboard navbar */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  border-bottom: 2px solid var(--coquelicot);
+}
+
+.user-navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.user-logo {
+  display: flex;
+  align-items: center;
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.user-logo span {
+  margin-left: 0.5rem;
+}
+
+/* HAMBURGER BUTTON */
+.user-nav-open-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1100;
+  transition: transform 0.3s ease;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.user-nav-open-btn:hover {
+  transform: scale(1.1);
+}
+
+.user-line {
+  width: 25px;
+  height: 3px;
+  background-color: #ffeb3b; /* Yellow color */
+  margin: 3px 0;
+  transition: 0.3s ease;
+}
+
+.user-nav-open-btn.active .user-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.user-nav-open-btn.active .user-line:nth-child(2) {
+  opacity: 0;
+}
+
+.user-nav-open-btn.active .user-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* MOBILE MENU */
+.user-navbar-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #000000; /* Black background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(-100%);
+  transition: 0.3s ease-in-out;
+  z-index: 1050;
+  overflow: hidden;
+}
+
+.user-navbar-menu.active {
+  transform: translateX(0);
+}
+
+.user-navbar-link {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  margin: 0.5rem 0;
+  border-radius: 0.5rem;
+  transition: 0.3s ease;
+  text-align: center;
+}
+
+.user-navbar-link:hover {
+  background-color: rgba(255, 235, 59, 0.1); /* Yellow hover */
+  color: var(--coquelicot);
+  transform: translateX(10px);
+}
+
+.user-nav-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: 2px solid var(--white);
+  color: var(--white);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  transition: 0.3s ease;
+}
+
+.user-nav-close-btn:hover {
+  background-color: var(--white);
+  color: #000000;
+  transform: rotate(90deg);
+}
+
+/* RESPONSIVE QUERIES */
+@media (max-width: 699px) {
+  .user-nav-open-btn {
+    display: flex;
+  }
+}
+
+@media (min-width: 700px) {
+  .user-nav-open-btn,
+  .user-nav-close-btn {
+    display: none;
+  }
+
+  .user-navbar-menu {
+    position: static;
+    height: auto;
+    width: auto;
+    background: none;
+    flex-direction: row;
+    gap: 0.5rem;
+    transform: none !important;
+  }
+
+  .user-navbar-link {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    width: auto;
+  }
+}
+
+/*-----------------------------------*\
+  #ADMIN DASHBOARD
+\*-----------------------------------*/
+
+.admin-dashboard {
+  padding: 0;
+}
+
+#recharts_measurement_span,
+span[id*="recharts_measurement"] {
+  display: none !important;
+  visibility: hidden !important;
+}

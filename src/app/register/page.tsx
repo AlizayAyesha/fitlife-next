@@ -710,10 +710,10 @@ export default function Register() {
                 </div>
               </fieldset>
 
-              <div className="flex justify-end mt-6" style={{gap: '16px'}}>
-                <a href="/user-demo" className="btn btn-secondary text-xs py-0.5 px-1" style={{backgroundColor: '#dc2626', color: 'white'}}>User Demo</a>
-                <a href="/admin-demo" className="btn btn-secondary text-xs py-0.5 px-1" style={{backgroundColor: '#dc2626', color: 'white'}}>Admin Demo</a>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 justify-items-center">
                 <button type="submit" className="btn btn-primary text-xs py-0.5 px-1">Submit Registration</button>
+                <a href="/admin-demo" className="btn btn-secondary text-xs py-0.5 px-1" style={{backgroundColor: '#dc2626', color: 'white'}}>Admin Demo</a>
+                <a href="/user-demo" className="btn btn-secondary text-xs py-0.5 px-1" style={{backgroundColor: '#dc2626', color: 'white'}}>User Demo</a>
               </div>
             </form>
           </div>

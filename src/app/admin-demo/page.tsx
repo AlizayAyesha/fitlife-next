@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import '../../styles/user-dashboard.css';
+import '../../styles/admin-navbar.css';
+import AdminNavbar from '../../components/AdminNavbar';
 
 // Sample data for admin analytics
 const userGrowthData = [
@@ -61,21 +64,7 @@ export default function AdminDemo() {
 
   return (
     <>
-      {/* Separate Navbar for Admin Dashboard */}
-      <header className="admin-navbar">
-        <div className="admin-navbar-container">
-          <a href="/" className="admin-navbar-logo">
-            {React.createElement('ion-icon', { name: 'barbell-sharp', 'aria-hidden': true })}
-            <span>AdminPanel</span>
-          </a>
-          <div className="admin-navbar-menu">
-            <a href="/leader-dashboard" className="admin-navbar-link">Leader Dashboard</a>
-            <a href="/rollover-balance" className="admin-navbar-link">Rollover Balance</a>
-            <a href="/banks-accounts" className="admin-navbar-link">Banks Accounts</a>
-            <a href="/admin-demo" className="admin-navbar-link active">Admin Panel</a>
-          </div>
-        </div>
-      </header>
+      <AdminNavbar />
 
       <main>
         <section className="admin-dashboard">

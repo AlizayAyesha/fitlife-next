@@ -34,7 +34,7 @@ const Coach = () => {
   return (
     <>
       <Navbar />
-      <main className="pt-20">
+      <main>
         {/* Hero Section */}
         <section className="coach-hero">
           <div className="container">
@@ -51,7 +51,7 @@ const Coach = () => {
               </div>
 
               {/* Content - Right Side */}
-              <div className="coach-content">
+              <div className="coach-content" style={{paddingTop: '100px'}}>
                 <h1 className="coach-h1">
                   Dr. Marco
                 </h1>

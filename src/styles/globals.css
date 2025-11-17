@@ -177,7 +177,7 @@ body {
   color: var(--sonic-silver);
   font-size: 1.6rem;
   line-height: 1.6;
-  padding-top: 100px; /* Account for fixed navbar height with extra space */
+  padding-top: 0 !important;
 }
 
 :focus-visible { outline-offset: 4px; }
@@ -1783,6 +1783,12 @@ abs-img-1 {
   .coach-image { justify-content: flex-start; }
 }
 
+@media (max-width: 767px) {
+  .coach-image {
+    padding-top: 200px;
+  }
+}
+
 .coach-image img {
   width: 20rem;
   height: 20rem;
@@ -1801,10 +1807,17 @@ abs-img-1 {
 .coach-content {
   flex: 1;
   text-align: center;
+  padding-top: 100px;
 }
 
 @media (min-width: 1024px) {
   .coach-content { text-align: left; }
+}
+
+@media (max-width: 767px) {
+  .coach-content {
+    padding-top: 200px;
+  }
 }
 
 .coach-h1 {

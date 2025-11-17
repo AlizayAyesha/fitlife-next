@@ -81,7 +81,7 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-              <Link href="/payment" className={`pricing-btn ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}>
+              <Link href="/payment" className={`inline-block w-full py-3 px-6 rounded-lg font-bold text-lg transform transition duration-300 hover:scale-105 hover:shadow-lg ${plan.popular ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-blue-500/25' : 'bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white'}`}>
                 {plan.buttonText}
               </Link>
             </div>
@@ -89,7 +89,7 @@ export default function Pricing() {
         </div>
 
         <div className="pricing-footer">
-          <p className="pricing-note">All plans include a 14-day free trial. Cancel anytime.</p>
+          <p className="pricing-note text-white">All plans include a 14-day free trial. Cancel anytime.</p>
         </div>
       </div>
     </section>
